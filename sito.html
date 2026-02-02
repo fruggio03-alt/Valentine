@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine 💘</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6e6;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: Arial, sans-serif;
+            color: #ff3366;
+            margin: 20px;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #gifHover {
+            display: none;
+        }
+
+        .bottoni {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #si {
+            background-color: #66ff99;
+        }
+
+        #no {
+            background-color: #ff6666;
+            position: relative;
+        }
+
+        /* Cuoricini */
+        @keyframes salita {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img id="gif" src="cat1.gif" alt="cat">
+        <img id="gifHover" src="cat4.gif" alt="hover cat">
+
+        <h1 id="frase">Will you be my Valentine? 💘</h1>
+
+        <div class="bottoni">
+            <button id="si">Yes 💖</button>
+            <button id="no">No 💔</button>
+        </div>
+    </div>
+
+    <script>
+        const siButton = document.getElementById("si");
+        const noButton = document.getElementById("no");
+        const gif = document.getElementById("gif");
+        const gifHover = document.getElementById("gifHover");
+        const frase = document.getElementById("frase");
+
+        const frasi = [
+            "Sei sicura?",
+            "Daiiii 🥺",
+            "Ma proprio no?",
+            "Il mio cuore 💔",
+            "Ok mi arrendo 😢"
+        ];
+
+        let indexFrase = 0;
+
+        // NO scappa
+        noButton.addEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+
+            noButton.style.position = "absolute";
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+
+            if (indexFrase < frasi.length) {
+                noButton.innerText = frasi[indexFrase++];
+            }
+        });
+
+        // YES hover
+        siButton.addEventListener("mouseover", () => {
+            gifHover.style.display = "block";
+            noButton.style.display = "none";
+        });
+
+        siButton.addEventListener("mouseout", () => {
+            gifHover.style.display = "none";
+            noButton.style.display = "inline-block";
+        });
+
+        // YES click
+        siButton.addEventListener("click", () => {
+            frase.innerText = "TI AMO AMORE MIO ❤️";
+            gif.src = "cat2.gif";
+            creaCuori();
+        });
+
+        // Cuoricini
+        function creaCuori() {
+            for (let i = 0; i < 30; i++) {
+                const cuore = document.createElement("div");
+                cuore.innerText = "❤️";
+                cuore.style.position = "fixed";
+                cuore.style.left = Math.random() * 100 + "vw";
+                cuore.style.top = "100vh";
+                cuore.style.fontSize = "24px";
+                cuore.style.animation = "salita 3s linear";
+                document.body.appendChild(cuore);
+
+                setTimeout(() => cuore.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
