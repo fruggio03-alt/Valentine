@@ -1,157 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Valentine 💘</title>
+<meta charset="UTF-8">
+<title>Una domanda importante 💘</title>
 
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffe6e6;
-            overflow: hidden;
-        }
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    background: #ffe6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
 
-        .container {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+.container {
+    text-align: center;
+}
 
-        h1 {
-            font-family: Arial, sans-serif;
-            color: #ff3366;
-            margin: 20px;
-        }
+img {
+    width: 180px;
+    margin-bottom: 20px;
+}
 
-        img {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
+#gifHover {
+    display: none;
+}
 
-        #gifHover {
-            display: none;
-        }
+button {
+    padding: 20px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
 
-        .bottoni {
-            display: flex;
-            gap: 20px;
-        }
+#si {
+    background: #66ff99;
+}
 
-        button {
-            padding: 20px 40px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+#no {
+    background: #ff6666;
+    position: relative;
+}
 
-        #si {
-            background-color: #66ff99;
-        }
-
-        #no {
-            background-color: #ff6666;
-            position: relative;
-        }
-
-        /* Cuoricini */
-        @keyframes salita {
-            from {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-120vh);
-                opacity: 0;
-            }
-        }
-    </style>
+@keyframes cuore {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <img id="gif" src="cat1.gif" alt="cat">
-        <img id="gifHover" src="cat4.gif" alt="hover cat">
+<div class="container">
 
-        <h1 id="frase">Will you be my Valentine? 💘</h1>
+<img id="gif" src="data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVMKudcQ+hfUOZrY+pwbe9yefF2g/N9i/x/iP6CjP+Ekf+Jl/+RmP+TnP+cof+eqP+iqP+nrP+psf+usf+ytf+3uP+6vP/Bwf/DxP/Fxf/IyP/KyP/Nzf/Q0P/T0f/V1f/Y2P/b2f/e3f/h4f/k5P/n5f/r6P/u7f/x8P/z8f/19f/4+P/7+/v///8AAAAAACH5BAEAAB8ALAAAAAAQABAAAAVu4CeOZGmeaKqubOtCzPMwDAdYpEME6j2yUQkJgRBJc5BSoEgYJQeLxLw4Cw6GxEAgWCoGg+Hg0Gg4DAwKAh+PAgEAOw==" alt="gattino">
 
-        <div class="bottoni">
-            <button id="si">Yes 💖</button>
-            <button id="no">No 💔</button>
-        </div>
-    </div>
+<img id="gifHover" src="data:image/gif;base64,R0lGODlhEAAQAMQAAACZmZmqqqqurq6zs7O/v7/Dw8PX19fj4+Pn5+fr6+vv7+/z8/P39/f7+/v///8AAAAAACH5BAEAAB8ALAAAAAAQABAAAAVp4CeOZGmeaKqubOtCzPMwDAdYpEME6j2yUQkJgRBJc5BSoEgYJQeLxLw4Cw6GxEAgWCoGg+Hg0Gg4DAwKAh+PAgEAOw==" alt="cuori">
 
-    <script>
-        const siButton = document.getElementById("si");
-        const noButton = document.getElementById("no");
-        const gif = document.getElementById("gif");
-        const gifHover = document.getElementById("gifHover");
-        const frase = document.getElementById("frase");
+<h1 id="frase">Vuoi essere la mia Valentine? 💖</h1>
 
-        const frasi = [
-            "Sei sicura?",
-            "Daiiii 🥺",
-            "Ma proprio no?",
-            "Il mio cuore 💔",
-            "Ok mi arrendo 😢"
-        ];
+<button id="si">Yes 💘</button>
+<button id="no">No 💔</button>
 
-        let indexFrase = 0;
+</div>
 
-        // NO scappa
-        noButton.addEventListener("mouseover", () => {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
+<script>
+const si = document.getElementById("si");
+const no = document.getElementById("no");
+const gif = document.getElementById("gif");
+const gifHover = document.getElementById("gifHover");
+const frase = document.getElementById("frase");
 
-            noButton.style.position = "absolute";
-            noButton.style.left = x + "px";
-            noButton.style.top = y + "px";
+const frasi = ["Sei sicura?", "Daiii 🥺", "Non farlo 😢", "Il mio cuore 💔"];
+let i = 0;
 
-            if (indexFrase < frasi.length) {
-                noButton.innerText = frasi[indexFrase++];
-            }
-        });
+no.addEventListener("mouseover", () => {
+    no.style.position = "absolute";
+    no.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    no.style.top = Math.random() * (window.innerHeight - 60) + "px";
+    if (i < frasi.length) no.innerText = frasi[i++];
+});
 
-        // YES hover
-        siButton.addEventListener("mouseover", () => {
-            gifHover.style.display = "block";
-            noButton.style.display = "none";
-        });
+si.addEventListener("mouseover", () => {
+    gifHover.style.display = "block";
+    no.style.display = "none";
+});
 
-        siButton.addEventListener("mouseout", () => {
-            gifHover.style.display = "none";
-            noButton.style.display = "inline-block";
-        });
+si.addEventListener("mouseout", () => {
+    gifHover.style.display = "none";
+    no.style.display = "inline-block";
+});
 
-        // YES click
-        siButton.addEventListener("click", () => {
-            frase.innerText = "TI AMO AMORE MIO ❤️";
-            gif.src = "cat2.gif";
-            creaCuori();
-        });
+si.addEventListener("click", () => {
+    frase.innerText = "TI AMO ❤️";
+    pioggiaCuori();
+});
 
-        // Cuoricini
-        function creaCuori() {
-            for (let i = 0; i < 30; i++) {
-                const cuore = document.createElement("div");
-                cuore.innerText = "❤️";
-                cuore.style.position = "fixed";
-                cuore.style.left = Math.random() * 100 + "vw";
-                cuore.style.top = "100vh";
-                cuore.style.fontSize = "24px";
-                cuore.style.animation = "salita 3s linear";
-                document.body.appendChild(cuore);
-
-                setTimeout(() => cuore.remove(), 3000);
-            }
-        }
-    </script>
+function pioggiaCuori() {
+    for (let i = 0; i < 25; i++) {
+        const c = document.createElement("div");
+        c.innerText = "❤️";
+        c.style.position = "fixed";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.top = "100vh";
+        c.style.fontSize = "24px";
+        c.style.animation = "cuore 3s linear";
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+    }
+}
+</script>
 </body>
 </html>
